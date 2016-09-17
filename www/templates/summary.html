@@ -1,0 +1,73 @@
+<style>
+    #line {
+        width: 700px;
+        margin: 20px 0;
+        height: 300px;
+        background: #eee;
+    }
+    
+    button {
+        margin: 20px 0 0 20px;
+    }
+    
+    .red {
+        color: red;
+    }
+    
+    ​.green {
+        color: green;
+    }
+</style>
+<ion-view view-title="{{goal.name}}">
+    <ion-content>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <h1 class=" ">{{goal.amount | currency : '£'}} </h1>
+                <i class="ion-arrow-up-b green" data-pack="default" data-tags=""></i> 7%
+            </div>
+        </div>
+        <div class="list card">
+            <div class="item ">
+                <h2>Performance</h2>
+            </div>
+
+            <div id="line" linechart></div>​
+        </div>
+
+        <div class="list card">
+            <div class="item ">
+                <h2>Performance</h2>
+            </div>
+            <div id="pie-chart" class="pieID pie">
+
+            </div>
+
+            <ul class="pieID legend">
+                <li>
+                    <em>ETFs</em>
+                    <span>718</span>
+                </li>
+                <li>
+                    <em>Bonds</em>
+                    <span>531</span>
+                </li>
+                <li>
+                    <em>FX</em>
+                    <span>868</span>
+                </li>
+                <li>
+                    <em>Securites</em>
+                    <span>344</span>
+                </li>
+            </ul>
+        </div>
+        <div class="list card list-inset">
+            <div class="item">
+                Your Team
+            </div>
+            <div class="item item-avatar" ng-repeat="member in goal.members">
+                <img ng-src="{{member.imgUrl}}" /> {{member.name}}
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

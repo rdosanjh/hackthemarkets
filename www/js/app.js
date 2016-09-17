@@ -34,7 +34,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         templateUrl: 'templates/signupGoal.html',
         controller: 'SignupCtrl'
       })
-      .state('goalOptions',{
+      .state('goalOptions', {
         url: '/goalOptions',
         templateUrl: 'templates/goalOptions.html',
         controller: 'GoalCtrl'
@@ -45,10 +45,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         templateUrl: 'templates/menu.html',
         controller: 'AppCtrl'
       })
-      .state('app.summary',{
+      .state('app.summary', {
         url: '/summary/:name',
-        templateUrl:'templates/summary.html',
-        controller: 'SummaryCtrl'
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/summary.html',
+            controller: 'SummaryCtrl'
+          }
+        }
       })
       .state('app.search', {
         url: '/search',

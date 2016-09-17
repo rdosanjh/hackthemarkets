@@ -106,3 +106,6 @@ footer {
 .clearfix{
     clear: all;
 }
+.text-center{
+  text-align: center;
+}
