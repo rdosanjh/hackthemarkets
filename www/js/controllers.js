@@ -9,35 +9,35 @@ angular.module('starter.controllers', ['starter.services', 'starter.Summary'])
     //});
 
     // Form data for the login modal
-    $scope.loginData = {};
+    // $scope.loginData = {};
 
-    // Create the login modal that we will use later
-    $ionicModal.fromTemplateUrl('templates/login.html', {
-      scope: $scope
-    }).then(function (modal) {
-      $scope.modal = modal;
-    });
+    // // Create the login modal that we will use later
+    // $ionicModal.fromTemplateUrl('templates/login.html', {
+    //   scope: $scope
+    // }).then(function (modal) {
+    //   $scope.modal = modal;
+    // });
 
-    // Triggered in the login modal to close it
-    $scope.closeLogin = function () {
-      $scope.modal.hide();
-    };
+    // // Triggered in the login modal to close it
+    // $scope.closeLogin = function () {
+    //   $scope.modal.hide();
+    // };
 
-    // Open the login modal
-    $scope.login = function () {
-      $scope.modal.show();
-    };
+    // // Open the login modal
+    // $scope.login = function () {
+    //   $scope.modal.show();
+    // };
 
-    // Perform the login action when the user submits the login form
-    $scope.doLogin = function () {
-      console.log('Doing login', $scope.loginData);
+    // // Perform the login action when the user submits the login form
+    // $scope.doLogin = function () {
+    //   console.log('Doing login', $scope.loginData);
 
-      // Simulate a login delay. Remove this and replace with your login
-      // code if using a login system
-      $timeout(function () {
-        $scope.closeLogin();
-      }, 1000);
-    };
+    //   // Simulate a login delay. Remove this and replace with your login
+    //   // code if using a login system
+    //   $timeout(function () {
+    //     $scope.closeLogin();
+    //   }, 1000);
+    // };
   })
 
   .controller('PlaylistsCtrl', function ($scope, detailsService) {
@@ -54,7 +54,7 @@ angular.module('starter.controllers', ['starter.services', 'starter.Summary'])
     if (!hasSamples) {
       $scope.details.goals.push({
         name: "Funding our startup",
-        amount: 100,
+        amount: 7432.73,
         members: [
           {
             name: 'Angela Dunkleman',
@@ -79,7 +79,41 @@ angular.module('starter.controllers', ['starter.services', 'starter.Summary'])
     }
 
   })
-  .controller('SignupCtrl', function ($scope, detailsService, $state) {
+  .controller('SignupCtrl', function ($scope, detailsService, $state, $ionicModal, $timeout) {
+
+    $scope.loginData = {};
+
+    // Create the login modal that we will use later
+    $ionicModal.fromTemplateUrl('templates/login.html', {
+      scope: $scope
+    }).then(function (modal) {
+      $scope.modal = modal;
+    });
+
+    // Triggered in the login modal to close it
+    $scope.closeLogin = function () {
+      $scope.modal.hide();
+    };
+
+    // Open the login modal
+    $scope.login = function () {
+      $scope.modal.show();
+    };
+
+    // Perform the login action when the user submits the login form
+    $scope.doLogin = function () {
+
+      console.log('Doing login', $scope.loginData);
+
+      // Simulate a login delay. Remove this and replace with your login
+      // code if using a login system
+      $timeout(function () {
+        $state.go('app.playlists');
+      }, 1000);
+    };
+
+
+
     $scope.goal = {};
     $scope.justInvest = function () {
       $scope.goal = {};
@@ -88,7 +122,7 @@ angular.module('starter.controllers', ['starter.services', 'starter.Summary'])
       $state.go("signupGoal");
     }
     $scope.goalNext = function () {
-      detailsService.addToUserDetails('goals', [$scope.goal])
+      detailsService.addToUserDetails('goals', [$scope.goal]);
       $state.go('goalOptions');
     }
   })
@@ -165,7 +199,7 @@ angular.module('starter.controllers', ['starter.services', 'starter.Summary'])
         details.goals[0] = $scope.goal;
         detailsService.setUserDetails(details);
       }
-      $state.go('app.playlists');
+      $state.go('register');
     }
   })
   .controller('PlaylistCtrl', function ($scope, $stateParams) {

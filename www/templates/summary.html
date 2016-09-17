@@ -17,6 +17,9 @@
     ​.green {
         color: green;
     }
+    .white{
+        color:#fff;
+    }
 </style>
 <ion-view view-title="{{goal.name}}">
     <ion-content>
@@ -25,6 +28,12 @@
                 <h1 class=" ">{{goal.amount | currency : '£'}} </h1>
                 <i class="ion-arrow-up-b green" data-pack="default" data-tags=""></i> 7%
             </div>
+        </div>
+        <div class="card" >
+            <div class="item item-text-wrap" style="background-color:#02A5C4;">
+                <h2 class="white">You are on Robeco one nutrual</h2>
+            </div>
+            
         </div>
         <div class="list card">
             <div class="item ">
@@ -67,6 +76,9 @@
             </div>
             <div class="item item-avatar" ng-repeat="member in goal.members">
                 <img ng-src="{{member.imgUrl}}" /> {{member.name}}
+            </div>
+            <div class="item">
+                <a ui-sref="app.addteam">Add team members</a>
             </div>
         </div>
     </ion-content>

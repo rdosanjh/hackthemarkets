@@ -21,7 +21,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     });
   })
-
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('signup', {
@@ -38,6 +37,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         url: '/goalOptions',
         templateUrl: 'templates/goalOptions.html',
         controller: 'GoalCtrl'
+      })
+      .state('register', {
+        url: '/register',
+        templateUrl: 'templates/login.html',
+        controller: 'SignupCtrl'
       })
       .state('app', {
         url: '/app',
@@ -62,7 +66,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           }
         }
       })
-
+      .state('app.addteam', {
+        url: '/addteam',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/addteam.html'
+          }
+        }
+      })
       .state('app.browse', {
         url: '/browse',
         views: {
