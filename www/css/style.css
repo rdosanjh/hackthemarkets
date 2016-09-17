@@ -106,6 +106,7 @@ footer {
 .clearfix{
     clear: all;
 }
+<<<<<<< HEAD
 
 
 svg {
@@ -369,3 +370,8 @@ button {
 .bullet .measure.s1 { fill: steelblue; }
 .bullet .title { font-size: 14px; font-weight: bold; }
 .bullet .subtitle { fill: #999; }
+=======
+.text-center{
+  text-align: center;
+}
+>>>>>>> 4a1733590b1b392754e49078570dbf3c089290c6

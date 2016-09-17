@@ -1,5 +1,4 @@
-angular.module('starter.controllers', ['starter.services'])
-
+angular.module('starter.controllers', ['starter.services', 'starter.Summary'])
   .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
 
     // With the new view caching in Ionic, Controllers are only called
@@ -43,29 +42,42 @@ angular.module('starter.controllers', ['starter.services'])
 
   .controller('PlaylistsCtrl', function ($scope, detailsService) {
     $scope.details = detailsService.getUserDetails();
-    if(!$scope.details.goals){
+
+    if (!$scope.details.goals) {
       $scope.details.goals = [];
     }
-    $scope.details.goals.push({
-      name: "Funding our startup",
-      amount: 100,
-      members: [
-        {
-          imgUrl: "https://static.pexels.com/photos/51969/model-female-girl-beautiful-51969-medium.jpeg"
-        },
-        {
-          imgUrl: "https://static.pexels.com/photos/103123/pexels-photo-103123-medium.jpeg"
-        },
-        {
-          imgUrl: "https://static.pexels.com/photos/7110/desk-office-workspace-coworking-medium.jpg"
-        }
-        
-      ]
-    });
-    $scope.details.goals.push({
-      name: "Buying a rolex",
-      amount: 1300
-    });
+
+    var hasSamples = $scope.details.goals.filter(function (goal) {
+      return goal.name === "Funding our startup";
+    }).length > 0;
+
+    if (!hasSamples) {
+      $scope.details.goals.push({
+        name: "Funding our startup",
+        amount: 100,
+        members: [
+          {
+            name: 'Angela Dunkleman',
+            imgUrl: "https://static.pexels.com/photos/51969/model-female-girl-beautiful-51969-medium.jpeg"
+          },
+          {
+            name: 'Freddy Eagles',
+            imgUrl: "https://static.pexels.com/photos/103123/pexels-photo-103123-medium.jpeg"
+          },
+          {
+            name: 'Chris Patel',
+            imgUrl: "https://static.pexels.com/photos/7110/desk-office-workspace-coworking-medium.jpg"
+          }
+
+        ]
+      });
+      $scope.details.goals.push({
+        name: "Buying a Rolex",
+        amount: 1300
+      });
+      detailsService.setUserDetails($scope.details);
+    }
+
   })
   .controller('SignupCtrl', function ($scope, detailsService, $state) {
     $scope.goal = {};
