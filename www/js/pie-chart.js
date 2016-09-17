@@ -47,13 +47,10 @@ function createPie(dataElement, pieElement) {
     "gray"
   ];
 
-  console.log("Length of lsit = " + listData.length) ;
 
   for(var i=0; i<listData.length; i++) {
-        console.log('Creating pie') ;
 
     var size = sliceSize(listData[i], listTotal);
-    console.log('Color = ' + color[i]) ;
     iterateSlices(size, pieElement, offset, i, 0, color[i]);
     $(dataElement+" li:nth-child("+(i+1)+")").css("border-color", color[i]);
     offset += size;
