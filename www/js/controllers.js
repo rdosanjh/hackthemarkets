@@ -129,125 +129,136 @@ angular.module('starter.controllers', ['starter.services', 'starter.Summary'])
 
   .controller('SpendingCtrl', function ($scope, detailsService, $state) {
 
-        $scope.randomize = function(d) {
-          if (!d.randomizer) d.randomizer = randomizer(d);
-          d.ranges = d.ranges.map(d.randomizer);
-          d.markers = d.markers.map(d.randomizer);
-          d.measures = d.measures.map(d.randomizer);
-          return d;
-        }
+    $scope.randomize = function (d) {
+      if (!d.randomizer) d.randomizer = randomizer(d);
+      d.ranges = d.ranges.map(d.randomizer);
+      d.markers = d.markers.map(d.randomizer);
+      d.measures = d.measures.map(d.randomizer);
+      return d;
+    }
 
-        $scope.randomizer =  function(d) {
-          var k = d3.max(d.ranges) * .2;
-          return function(d) {
-            return Math.max(0, d + k * (Math.random() - .5));
-          };
-        }
+    $scope.randomizer = function (d) {
+      var k = d3.max(d.ranges) * .2;
+      return function (d) {
+        return Math.max(0, d + k * (Math.random() - .5));
+      };
+    }
 
-        createPie(".pieID.legend", ".pieID.pie");
+    createPie(".pieID.legend", ".pieID.pie");
 
-        var margin = {top: 30, right: 20, bottom: 30, left: 50},
-          width = 400 - margin.left - margin.right,
-          height = 270 - margin.top - margin.bottom;
-         
-        // Parse the date / time
-        var parseDate = d3.time.format("%d-%b-%y").parse;
-         
-        // Set the ranges
-        var x = d3.time.scale().range([0, width]);
-        var y = d3.scale.linear().range([height, 0]);
-         
-        // Define the axes
-        var xAxis = d3.svg.axis().scale(x)
-          .orient("bottom").ticks(5);
-         
-        var yAxis = d3.svg.axis().scale(y)
-          .orient("left").ticks(5);
-         
-        // Define the line
-        var valueline = d3.svg.line()
-          .x(function(d) { return x(d.date); })
-          .y(function(d) { return y(d.close); });
-            
-        // Adds the svg canvas
-        var svg = d3.select("#chart")
-          .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+    var margin = { top: 30, right: 20, bottom: 30, left: 50 },
+      width = 400 - margin.left - margin.right,
+      height = 270 - margin.top - margin.bottom;
+
+    // Parse the date / time
+    var parseDate = d3.time.format("%d-%b-%y").parse;
+
+    // Set the ranges
+    var x = d3.time.scale().range([0, width]);
+    var y = d3.scale.linear().range([height, 0]);
+
+    // Define the axes
+    var xAxis = d3.svg.axis().scale(x)
+      .orient("bottom").ticks(5);
+
+    var yAxis = d3.svg.axis().scale(y)
+      .orient("left").ticks(5);
+
+    // Define the line
+    var valueline = d3.svg.line()
+      .x(function (d) { return x(d.date); })
+      .y(function (d) { return y(d.close); });
+
+    // Adds the svg canvas
+    var svg = d3.select("#chart")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    // Get the data
+    d3.csv("data.csv", function (error, data) {
+      data.forEach(function (d) {
+        d.date = parseDate(d.date);
+        d.close = +d.close;
+      });
+
+      x.domain(d3.extent(data, function (d) { return d.date; }));
+      y.domain([0, d3.max(data, function (d) { return d.close; })]);
+
+      var path = svg.append("path")
+        .attr("class", "line")
+        .attr("d", valueline(data));
+
+      var totalLength = path.node().getTotalLength();
+
+
+      path
+        .attr("stroke-dasharray", totalLength + " " + totalLength)
+        .attr("stroke-dashoffset", totalLength)
+        .transition()
+        .duration(1000)
+        .ease("linear")
+        .attr("stroke-dashoffset", 0);
+
+      svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+      svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+
+      var margin_tabs = { top: 5, right: 20, bottom: 20, left: 20 },
+        width_tabs = 400 - margin_tabs.left - margin_tabs.right,
+        height_tabs = 50 - margin_tabs.top - margin_tabs.bottom;
+
+      var chart = d3.bullet()
+        .width(width_tabs)
+        .height(height_tabs);
+
+      d3.json("bullets.json", function (error, data) {
+        if (error) throw error;
+
+        var svg = d3.select("#bullets").selectAll("svg")
+          .data(data)
+          .enter().append("svg")
+          .attr("class", "bullet")
+          .attr("width", width_tabs + margin_tabs.left + margin_tabs.right)
+          .attr("height", 80)
           .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-         
-        // Get the data
-        d3.csv("data.csv", function(error, data) {
-          data.forEach(function(d) {
-            d.date = parseDate(d.date);
-            d.close = +d.close;
-          });
-         
-          x.domain(d3.extent(data, function(d) { return d.date; }));
-          y.domain([0, d3.max(data, function(d) { return d.close; })]);
-         
-          svg.append("path")  
-            .attr("class", "line")
-            .attr("d", valueline(data));
-         
-          svg.append("g")   
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
-         
-          svg.append("g")   
-            .attr("class", "y axis")
-            .call(yAxis);
+          .attr("transform", "translate(" + margin_tabs.left + "," + margin_tabs.top + ")")
+          .call(chart);
 
+        var title = svg.append("g")
+          .style("text-anchor-tabs", "end")
+          .attr("transform", "translate(10," + height / 4 + ")");
 
-                  var margin_tabs = {top: 5, right: 20, bottom: 20, left: 20},
-                  width_tabs = 400 - margin_tabs.left - margin_tabs.right,
-                  height_tabs = 50 - margin_tabs.top - margin_tabs.bottom;
+        title.append("text")
+          .attr("class", "title")
+          .text(function (d) { return d.title; });
 
-                  var chart = d3.bullet()
-                      .width(width_tabs)
-                      .height(height_tabs);
+        title.append("text")
+          .attr("class", "subtitle")
+          .attr("dy", "1em")
+          .text(function (d) { return d.subtitle; });
 
-                  d3.json("bullets.json", function(error, data) {
-                    if (error) throw error;
-
-                    var svg = d3.select("#bullets").selectAll("svg")
-                        .data(data)
-                      .enter().append("svg")
-                        .attr("class", "bullet")
-                        .attr("width", width_tabs + margin_tabs.left + margin_tabs.right)
-                        .attr("height", 80)
-                      .append("g")
-                        .attr("transform", "translate(" + margin_tabs.left + "," + margin_tabs.top + ")")
-                        .call(chart);
-
-                    var title = svg.append("g")
-                        .style("text-anchor-tabs", "end")
-                        .attr("transform", "translate(10," + height / 4  + ")");
-
-                    title.append("text")
-                        .attr("class", "title")
-                        .text(function(d) { return d.title; });
-
-                    title.append("text")
-                        .attr("class", "subtitle")
-                        .attr("dy", "1em")
-                        .text(function(d) { return d.subtitle; });
-
-                    d3.selectAll("button").on("click", function() {
-                      svg.datum(randomize).call(chart.duration(1000)); // TODO automatic transition
-                    });
-                  });
-         
+        d3.selectAll("button").on("click", function () {
+          svg.datum(randomize).call(chart.duration(1000)); // TODO automatic transition
         });
+      });
 
-              ////////////////////////////
+    });
+
+    ////////////////////////////
 
 
-              
 
-              
+
+
 
 
 
