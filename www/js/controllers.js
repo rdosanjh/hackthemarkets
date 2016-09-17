@@ -64,6 +64,14 @@ angular.module('starter.controllers', ['starter.services'])
       $state.go('goalOptions');
     }
   })
+
+  .controller('SpendingCtrl', function ($scope, detailsService, $state) {
+
+    createPie(".pieID.legend", ".pieID.pie");
+
+  })
+
+
   .controller('GoalCtrl', function ($scope, detailsService, $state) {
     var details = detailsService.getUserDetails();
     console.log("details", details);
