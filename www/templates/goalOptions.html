@@ -1,0 +1,46 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Options for {{goal.name}}</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list list-inset">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Select a starting contribution</span>
+                <input type="number" ng-model="goal.amount" step="0.01" placeholder="10" min="1" step="any">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Select a monthly contribution</span>
+                <input type="number" ng-model="goal.monthly" step="0.01" placeholder="10" min="1" step="any">
+            </label>
+        </div>
+        <div class="list list-inset">
+            <div class="item item-divider">
+                <span>How far away is your goal ?</span>
+                <span style="float:right">{{goal.timeframe}} months</span>
+            </div>
+            <div class="item range range-positive">
+                0
+                <input type="range" name="volume" ng-model="goal.timeframe" min="0" max="60"> 60
+            </div>
+        </div>
+        <div class="list list-inset">
+            <ion-radio ng-model="goal.risk" ng-value="'high'">High Risk</ion-radio>
+            <ion-radio ng-model="goal.risk" ng-value="'moderate'">Moderate Risk</ion-radio>
+            <ion-radio ng-model="goal.risk" ng-value="'low'">Low Risk</ion-radio>
+        </div>
+        <div class="list list-inset" ng-if="goal.amount && goal.monthly && goal.risk">
+            <div class="item item-text-wrap">
+                Using this startagy you could reach year goal in {{getProjection()}} months.
+            </div>
+            <div class="item item-text-wrap" ng-if="howFar() < 0">
+                You are not set to reach your target. You need to increase your monthly contribution to {{correction()}}.
+            </div>
+            <div class="item item-text-wrap" ng-if="howFar() > 0">
+                You will reach your target early. You can decrease your monthly contribution to {{correction()}}.
+            </div>
+        </div>
+        <div class="bar bar-footer bar-balanced">
+            <div class="title" ng-click="goalOptionsNext()">Next</div>
+        </div>
+    </ion-content>
+</ion-modal-view>

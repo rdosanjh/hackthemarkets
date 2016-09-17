@@ -96,3 +96,13 @@ footer {
   margin: 5px;
 }
 /* Empty. Add your own CSS if you like */
+.thumbnail{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.clearfix{
+    clear: all;
+}
