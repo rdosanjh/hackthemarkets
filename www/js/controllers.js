@@ -83,7 +83,163 @@ angular.module('starter.controllers', ['starter.services'])
 
   .controller('SpendingCtrl', function ($scope, detailsService, $state) {
 
-    createPie(".pieID.legend", ".pieID.pie");
+        createPie(".pieID.legend", ".pieID.pie");
+
+         /*var margin = {top: 20, right: 20, bottom: 30, left: 50},
+          width = 960 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
+
+        //$scope.formatDate = ;
+
+        var x = d3.time.scale()
+          .range([0, width]);
+
+        var y = d3.scale.linear()
+          .range([height, 0]);
+
+        var xAxis = d3.svg.axis()
+          .scale(x)
+          .orient("bottom");
+
+        var yAxis = d3.svg.axis()
+          .scale(y)
+          .orient("left");
+
+        var line = d3.svg.line()
+          .x(function(d) { return x(d.date); })
+          .y(function(d) { return y(d.close); });
+
+        var svg = d3.select("#chart").append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+        $scope.type = function (d) {
+            console.log('Starting d') ;
+            console.log(d) ;
+            console.log(d.data) ;
+            d.date = d3.time.format("%d-%b-%y").parse(d.date);
+
+            console.log("Ending d") ;
+            console.log(d) ;
+            d.close = + d.close;
+
+            
+            return d;
+        };
+
+        d3.tsv("data.tsv", $scope.type, function(error, data) {
+
+          if (error) console.log('Error');
+          console.log('Got data ')
+          console.log(data)
+          
+          x.domain(d3.extent(data, function(d) { return d.date; }));
+          y.domain(d3.extent(data, function(d) { return d.close; }));
+
+          svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis)
+              .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", ".71em")
+                .style("text-anchor", "end")
+                .text("Price ($)");
+
+            svg.append("path")
+                .datum(data)
+                .attr("class", "line")
+                .attr("d", line);
+
+        });*/
+
+        var graphData = [{
+                // Visits
+                data: [ [6, 1300], [7, 1600], [8, 1900], [9, 2100], [10, 2500], [11, 2200], [12, 2000], [13, 1950], [14, 1900], [15, 2000] ],
+                color: '#71c73e'
+            }, {
+                // Returning Visits
+                data: [ [6, 500], [7, 600], [8, 550], [9, 600], [10, 800], [11, 900], [12, 800], [13, 850], [14, 830], [15, 1000] ],
+                color: '#77b7c5',
+                points: { radius: 4, fillColor: '#77b7c5' }
+            }
+        ];
+         
+
+         $.plot($('#graph-lines'), graphData, {
+            series: {
+                points: {
+                    show: true,
+                    radius: 5
+                },
+                lines: {
+                    show: true
+                },
+                shadowSize: 0
+            },
+            grid: {
+                color: '#646464',
+                borderColor: 'transparent',
+                borderWidth: 20,
+                hoverable: true
+            },
+            xaxis: {
+                tickColor: 'transparent',
+                tickDecimals: 2
+            },
+            yaxis: {
+                tickSize: 1000
+            }
+        });
+         
+        
+
+        $('#lines').on('click', function (e) {
+          $('#bars').removeClass('active');
+          $('#graph-bars').fadeOut();
+          $(this).addClass('active');
+          $('#graph-lines').fadeIn();
+          e.preventDefault();
+        });
+
+        
+
+        // Tooltip #################################################
+         $scope.showTooltip = function(x, y, contents) {
+          $('<div id="tooltip">' + contents + '</div>').css({
+            top: y - 16,
+            left: x + 20
+          }).appendTo('body').fadeIn();
+        }
+
+        var previousPoint = null;
+
+        $('#graph-lines').bind('plothover', function (event, pos, item) {
+          if (item) {
+            if (previousPoint != item.dataIndex) {
+              previousPoint = item.dataIndex;
+              $('#tooltip').remove();
+              var x = item.datapoint[0],
+                y = item.datapoint[1];
+                $scope.showTooltip(item.pageX, item.pageY, y + ' visitors at ' + x + '.00h');
+            }
+          } else {
+            $('#tooltip').remove();
+            previousPoint = null;
+          }
+        });
+
+
+    
+
 
   })
 

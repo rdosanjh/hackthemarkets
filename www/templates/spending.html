@@ -33,6 +33,32 @@
         <span>1145</span>
       </li>
     </ul>
+
+
+
+
+    <figure id="line_datalabels">
+
+		  <h3>Change in Global Surface Temperature, 5 Year Mean</h3>
+
+		  <chart data="#temps"
+		         map-xy="year five_year_mean"
+		         scale-x-linear="1882 2010"
+		         scale-y-linear="-0.8 0.8">
+		    <guide-y>
+		      <span class="label">{{value}}&deg;</span>
+		    </guide-y>
+		    <guide-x></guide-x>
+		    <range literal-x-extent="1966 2005"></range>
+		    <line></line>
+		    <points></points>
+		    <repeat class="data-labels">
+		      <annotation>{{five_year_mean}}&deg;</annotation>
+		    </repeat>
+		  </chart>
+
+		</figure>
+
   </ion-content>
 
 
