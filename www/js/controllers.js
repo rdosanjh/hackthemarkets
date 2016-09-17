@@ -43,7 +43,7 @@ angular.module('starter.controllers', ['starter.services'])
 
   .controller('PlaylistsCtrl', function ($scope, detailsService) {
     $scope.details = detailsService.getUserDetails();
-    if(!$scope.details.goals){
+    if (!$scope.details.goals) {
       $scope.details.goals = [];
     }
     $scope.details.goals.push({
@@ -59,7 +59,7 @@ angular.module('starter.controllers', ['starter.services'])
         {
           imgUrl: "https://static.pexels.com/photos/7110/desk-office-workspace-coworking-medium.jpg"
         }
-        
+
       ]
     });
     $scope.details.goals.push({
@@ -149,4 +149,8 @@ angular.module('starter.controllers', ['starter.services'])
     }
   })
   .controller('PlaylistCtrl', function ($scope, $stateParams) {
+  })
+  .controller('SummaryCtrl', function ($scope, $stateParams) {
+    
   });
+

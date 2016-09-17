@@ -45,7 +45,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         templateUrl: 'templates/menu.html',
         controller: 'AppCtrl'
       })
-
+      .state('app.summary',{
+        url: '/summary/:name',
+        templateUrl:'templates/summary.html',
+        controller: 'SummaryCtrl'
+      })
       .state('app.search', {
         url: '/search',
         views: {
