@@ -55,6 +55,7 @@ angular.module('starter.controllers', ['starter.services', 'starter.Summary'])
       $scope.details.goals.push({
         name: "Funding our startup",
         amount: 7432.73,
+        percentage : 155,
         members: [
           {
             name: 'Angela Dunkleman',
@@ -73,7 +74,8 @@ angular.module('starter.controllers', ['starter.services', 'starter.Summary'])
       });
       $scope.details.goals.push({
         name: "Buying a Rolex",
-        amount: 1300
+        amount: 1300,
+        percentage : 234
       });
       detailsService.setUserDetails($scope.details);
     }

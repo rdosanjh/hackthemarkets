@@ -6,6 +6,40 @@
         <span style="float:right">{{goal.amount | currency : '£' }}</span>
         <div class="clearfix"></div>
         <img ng-repeat="member in goal.members"  class="thumbnail" ng-src="{{member.imgUrl}}" />
+
+
+        <svg style = "display:block" class="bullet" width="400" height="80"><g transform="translate(5,15)">
+        <rect class="range s0" width="360" height="25" x="0"></rect>
+        <rect class="range s1" width="{{goal.percentage}}" height="25" x="0"></rect>
+        <rect class="measure s1" width="{{goal.percentage}}" height="8.333333333333334" x="0" y="8.333333333333334"></rect>
+
+
+        <g class="tick" transform="translate(0,0)" style="opacity: 1;">
+        <line y1="25" y2="29.166666666666668"></line><text text-anchor="middle" dy="1em" y="29.166666666666668">0</text></g>
+        <!--<g class="tick" transform="translate(60,0)" style="opacity: 1;">
+          <line y1="25" y2="29.166666666666668"></line>
+          <text text-anchor="middle" dy="1em" y="29.166666666666668">50</text></g>-->
+         
+
+
+          <g class="tick" transform="translate(180,0)" style="opacity: 1;"><line y1="25" y2="29.166666666666668"></line><text text-anchor="middle" dy="1em" y="29.166666666666668">50</text></g>
+
+
+          
+
+
+          <!--<g class="tick" transform="translate(300,0)" style="opacity: 1;"><line y1="25" y2="29.166666666666668"></line>
+
+          <text text-anchor="middle" dy="1em" y="29.166666666666668">250</text></g>-->
+
+
+          <g class="tick" transform="translate(360,0)" style="opacity: 1;"><line y1="25" y2="29.166666666666668"></line>
+
+
+          <text text-anchor="middle" dy="1em" y="29.166666666666668">100</text></g>
+
+          <g transform="translate(10,52.5)"><text class="title">P&L</text><text class="subtitle" dy="1em">%</text></g></g></svg>
+
       </ion-item>
     </ion-list>
   </ion-content>
