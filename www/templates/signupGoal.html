@@ -5,28 +5,31 @@
     <ion-content>
         <div class="card">
             <ion-list>
-                <ion-radio ng-model="choice" ng-value="'A'">Car</ion-radio>
-                <ion-radio ng-model="choice" ng-value="'B'">Holiday</ion-radio>
-                <ion-radio ng-model="choice" ng-value="'B'">Shopping Spree</ion-radio>
-                <ion-radio ng-model="choice" ng-value="'B'">Treat Yourself</ion-radio>
-                <ion-radio ng-model="choice" ng-value="'B'">Other</ion-radio>
+                <ion-radio ng-model="goal.type" ng-value="'Car'">Car</ion-radio>
+                <ion-radio ng-model="goal.type" ng-value="'Holiday'">Holiday</ion-radio>
+                <ion-radio ng-model="goal.type" ng-value="'Shopping Spree'">Shopping Spree</ion-radio>
+                <ion-radio ng-model="goal.type" ng-value="'Treat Yourself'">Treat Yourself</ion-radio>
+                <ion-radio ng-model="goal.type" ng-value="'Other'">Other</ion-radio>
             </ion-list>
         </div>
         <div class="card">
             <div class="list">
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Give this goal a name</span>
-                    <input type="text" placeholder="John">
+                    <input type="text" ng-model="goal.name" placeholder="John">
                  </label>
                 <label class="item item-input item-stacked-label">
-                     <span class="input-label">Select an amount</span>
-                    <span>£</span> <input type="number" placeholder="10" min="1" step="any">
-                    
+                     <span class="input-label">Select a starting amount</span>
+                     <input type="number" ng-model="goal.amount" placeholder="10" min="1" step="any">
+                </label>
+                <label class="item item-input item-stacked-label">
+                     <span class="input-label">Select a monthly contribution</span>
+                     <input type="number" ng-model="goal.monthly" placeholder="10" min="1" step="any">
                 </label>
             </div>
         </div>
-        <div class="bar bar-footer bar-balanced">
-            <div class="title">Footer</div>
+        <div class="bar bar-footer bar-balanced" ng-click="goalNext()">
+            <div class="title">Next</div>
         </div>
     </ion-content>
 </ion-modal-view>

@@ -5,17 +5,21 @@ angular.module('starter.services', [])
             addToUserDetails: addToUserDetails,
             getUserDetails: getUserDetails
         }
-        var userDetails = {};
+        var _this = this;
+        this.userDetails = {};
         function addToUserDetails(key, value) {
-            userDetails[key] = value;
+            console.log("setting details ...");
+            console.log("key",key);
+            console.log("value",value);
+            _this.userDetails[key] = value;
         }
         function setUserDetails(details) {
             console.log("setting details ...");
             console.log(details);
-            userDetails = details;
+            _this.userDetails = details;
         }
         function getUserDetails(details) {
-            return userDetails;
+            return _this.userDetails;
         }
 
         return service;

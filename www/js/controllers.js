@@ -51,14 +51,45 @@ angular.module('starter.controllers', ['starter.services'])
       { title: 'Cowbell', id: 6 }
     ];
   })
-  .controller('SignupCtrl', function ($scope,detailsService, $state) {
+  .controller('SignupCtrl', function ($scope, detailsService, $state) {
+    $scope.goal = {};
     $scope.justInvest = function () {
-      
+      $scope.goal = {};
     };
-    $scope.hasGoal = function (){
+    $scope.hasGoal = function () {
       $state.go("signupGoal");
     }
+    $scope.goalNext = function () {
+      detailsService.addToUserDetails('goals', [$scope.goal])
+      $state.go('goalOptions');
+    }
   })
+  .controller('GoalCtrl', function ($scope, detailsService, $state) {
+    var details = detailsService.getUserDetails();
+    console.log("details", details);
+    if (details && details.goals) {
+      $scope.goal = details.goals[0];
+      if ($scope.goal.type === "Car") {
+          $scope.goal.timeframe = 3;
+      }
+      if ($scope.goal.type === "Holiday") {
+          $scope.goal.timeframe = 1;
 
+      }
+      if ($scope.goal.type === "Shopping Spree") {
+          $scope.goal.timeframe = 1;
+
+      }
+      if ($scope.goal.type === "Treat Yourself") {
+          $scope.goal.timeframe = 2;
+
+      }
+      if ($scope.goal.type === "Other") {
+          $scope.goal.timeframe = 5;
+
+      }
+    }
+
+  })
   .controller('PlaylistCtrl', function ($scope, $stateParams) {
   });
