@@ -1,0 +1,32 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">What am i investing for ?</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="card">
+            <ion-list>
+                <ion-radio ng-model="choice" ng-value="'A'">Car</ion-radio>
+                <ion-radio ng-model="choice" ng-value="'B'">Holiday</ion-radio>
+                <ion-radio ng-model="choice" ng-value="'B'">Shopping Spree</ion-radio>
+                <ion-radio ng-model="choice" ng-value="'B'">Treat Yourself</ion-radio>
+                <ion-radio ng-model="choice" ng-value="'B'">Other</ion-radio>
+            </ion-list>
+        </div>
+        <div class="card">
+            <div class="list">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Give this goal a name</span>
+                    <input type="text" placeholder="John">
+                 </label>
+                <label class="item item-input item-stacked-label">
+                     <span class="input-label">Select an amount</span>
+                    <span>£</span> <input type="number" placeholder="10" min="1" step="any">
+                    
+                </label>
+            </div>
+        </div>
+        <div class="bar bar-footer bar-balanced">
+            <div class="title">Footer</div>
+        </div>
+    </ion-content>
+</ion-modal-view>
