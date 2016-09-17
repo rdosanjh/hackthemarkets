@@ -41,15 +41,31 @@ angular.module('starter.controllers', ['starter.services'])
     };
   })
 
-  .controller('PlaylistsCtrl', function ($scope) {
-    $scope.playlists = [
-      { title: 'Reggae', id: 1 },
-      { title: 'Chill', id: 2 },
-      { title: 'Dubstep', id: 3 },
-      { title: 'Indie', id: 4 },
-      { title: 'Rap', id: 5 },
-      { title: 'Cowbell', id: 6 }
-    ];
+  .controller('PlaylistsCtrl', function ($scope, detailsService) {
+    $scope.details = detailsService.getUserDetails();
+    if(!$scope.details.goals){
+      $scope.details.goals = [];
+    }
+    $scope.details.goals.push({
+      name: "Funding our startup",
+      amount: 100,
+      members: [
+        {
+          imgUrl: "https://static.pexels.com/photos/51969/model-female-girl-beautiful-51969-medium.jpeg"
+        },
+        {
+          imgUrl: "https://static.pexels.com/photos/103123/pexels-photo-103123-medium.jpeg"
+        },
+        {
+          imgUrl: "https://static.pexels.com/photos/7110/desk-office-workspace-coworking-medium.jpg"
+        }
+        
+      ]
+    });
+    $scope.details.goals.push({
+      name: "Buying a rolex",
+      amount: 1300
+    });
   })
   .controller('SignupCtrl', function ($scope, detailsService, $state) {
     $scope.goal = {};
@@ -70,26 +86,67 @@ angular.module('starter.controllers', ['starter.services'])
     if (details && details.goals) {
       $scope.goal = details.goals[0];
       if ($scope.goal.type === "Car") {
-          $scope.goal.timeframe = 3;
+        $scope.goal.timeframe = 3;
       }
       if ($scope.goal.type === "Holiday") {
-          $scope.goal.timeframe = 1;
+        $scope.goal.timeframe = 1;
 
       }
       if ($scope.goal.type === "Shopping Spree") {
-          $scope.goal.timeframe = 1;
+        $scope.goal.timeframe = 1;
 
       }
       if ($scope.goal.type === "Treat Yourself") {
-          $scope.goal.timeframe = 2;
+        $scope.goal.timeframe = 2;
 
       }
       if ($scope.goal.type === "Other") {
-          $scope.goal.timeframe = 5;
-
+        $scope.goal.timeframe = 5;
       }
     }
 
+    $scope.getProjection = function () {
+      try {
+        var growthAmount = 1;
+        if ($scope.goal.risk === "low") {
+          growthAmount = 1.01;
+          return Math.round((($scope.goal.target || 0 - $scope.goal.amount || 0) / $scope.goal.monthly || 1) + 1);
+        }
+        if ($scope.goal.risk === "moderate") {
+          growthAmount = 1.07;
+          return Math.round(($scope.goal.target || 0 - $scope.goal.amount || 0) / $scope.goal.monthly || 1);
+
+        }
+        if ($scope.goal.risk === "high") {
+          growthAmount = 1.2;
+          return Math.round((($scope.goal.target || 0 - $scope.goal.amount || 0) / $scope.goal.monthly || 1) - 1);
+        }
+
+      } catch (e) {
+        return -1;
+      }
+    }
+
+    $scope.howFar = function () {
+      return Math.round($scope.goal.timeframe - $scope.getProjection());
+    }
+
+    $scope.correction = function () {
+      return Math.round(($scope.goal.target - $scope.goal.amount) / $scope.goal.timeframe);
+    }
+
+    $scope.goalOptionsNext = function () {
+      var details = detailsService.getUserDetails();
+      if (!details.goals) {
+        details.goals = [$scope.goal];
+        detailsService.setUserDetails(details);
+      }
+      else {
+        details.goals[0] = $scope.goal;
+        detailsService.setUserDetails(details);
+      }
+      $state.go('app.playlists');
+    }
   })
   .controller('PlaylistCtrl', function ($scope, $stateParams) {
   });

@@ -19,12 +19,8 @@
                     <input type="text" ng-model="goal.name" placeholder="John">
                  </label>
                 <label class="item item-input item-stacked-label">
-                     <span class="input-label">Select a starting amount</span>
-                     <input type="number" ng-model="goal.amount" placeholder="10" min="1" step="any">
-                </label>
-                <label class="item item-input item-stacked-label">
-                     <span class="input-label">Select a monthly contribution</span>
-                     <input type="number" ng-model="goal.monthly" placeholder="10" min="1" step="any">
+                     <span class="input-label">Select a target amount</span>
+                     <input type="number" ng-model="goal.target" step="0.01" placeholder="10" min="1" step="any">
                 </label>
             </div>
         </div>

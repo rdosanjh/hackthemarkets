@@ -1,8 +1,11 @@
-<ion-view view-title="Playlists">
+<ion-view view-title="myRobeco">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
-        {{playlist.title}}
+      <ion-item ng-repeat="goal in details.goals">
+        <h2 style="float:left">{{goal.name}}</h2>
+        <span style="float:right">{{goal.amount | currency : '£' }}</span>
+        <div class="clearfix"></div>
+          <img ng-repeat="member in goal.members" class="thumbnail" ng-src="{{member.imgUrl}}" />
       </ion-item>
     </ion-list>
   </ion-content>
