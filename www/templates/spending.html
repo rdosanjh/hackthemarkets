@@ -16,7 +16,7 @@
 
     </div>
   </div>
-  <ion-content style="margin-top: 85px;">
+  <ion-content style="margin-top: 70px;">
     <div ng-show="!summary">
       <div id="pie-chart" class="pieID pie">
 
@@ -56,11 +56,19 @@
             <strong>4 months earlier</strong>.
           </p>
           <p>
-              <a>Click here to increase your monthly contribution by {{20 | currency : '£'}}</a>
+            <a>Click here to increase your monthly contribution by {{20 | currency : '£'}}</a>
           </p>
         </div>
-
-
+      </div>
+      <div class="card">
+        <div class="item item-text-wrap">
+          <p>
+            80% of people your age have started saving for a home deposit. Would you like to set a goal for a home deposit.
+          </p>
+          <p>
+            <a>Click here to learn more.</a>
+          </p>
+        </div>
       </div>
       <div class="card">
 
@@ -86,16 +94,6 @@
         </div>
       </div>
 
-      <div class="card">
-        <div class="item item-text-wrap">
-          <p>
-            Your investing is going really well if you adjust your goals raiseing the deposit for a home may be closer than you think.
-          </p>
-          <p>
-            <a>Click here to learn more.</a>
-          </p>
-        </div>
-      </div>
       <!--<ion-list>
       <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
         {{playlist.title}}
