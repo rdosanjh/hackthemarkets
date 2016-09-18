@@ -11,7 +11,7 @@
       Overview
       </a>
       <a class="tab-item" ng-click="summary = true" ng-class="{'active': summary}">
-    Tips
+    myBot
     </a>
 
     </div>
@@ -56,7 +56,7 @@
             <strong>4 months earlier</strong>.
           </p>
           <p>
-            <a>Click here to increase your monthly contribution by {{20 | currency : '£'}}</a>
+              <a>Click here to increase your monthly contribution by {{20 | currency : '£'}}</a>
           </p>
         </div>
 
@@ -77,10 +77,26 @@
 
       <div class="card">
         <div class="item item-text-wrap">
+          <p>
+            You currently visit Costa coffee every weekday. Going twice a week would <strong>save you {{15 | currency : '£'}}</strong>.
+          </p>
+          <p>
+            <a>Click here to increase your monthly contribution by {{15 | currency : '£'}}</a>
+          </p>
         </div>
       </div>
-    </div>
-    <!--<ion-list>
+
+      <div class="card">
+        <div class="item item-text-wrap">
+          <p>
+            Your investing is going really well if you adjust your goals raiseing the deposit for a home may be closer than you think.
+          </p>
+          <p>
+            <a>Click here to learn more.</a>
+          </p>
+        </div>
+      </div>
+      <!--<ion-list>
       <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
         {{playlist.title}}
       </ion-item>
@@ -93,7 +109,7 @@
 
 
 
-    <!--<figure id="line_datalabels">
+      <!--<figure id="line_datalabels">
 
 
 		  <chart data="#temps"
