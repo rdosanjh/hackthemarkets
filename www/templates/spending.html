@@ -1,5 +1,85 @@
-<ion-view view-title="Spending">
-  <ion-content>
+<style>
+  .legend span::after {
+    content: ' %'
+  }
+</style>
+
+<ion-view view-title="mySpending">
+  <div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+    <div class="tabs ">
+      <a class="tab-item" ng-click="summary = false" ng-class="{'active': !summary}">
+      Overview
+      </a>
+      <a class="tab-item" ng-click="summary = true" ng-class="{'active': summary}">
+    Tips
+    </a>
+
+    </div>
+  </div>
+  <ion-content style="margin-top: 85px;">
+    <div ng-show="!summary">
+      <div id="pie-chart" class="pieID pie">
+
+      </div>
+
+      <ul class="pieID legend">
+        <li>
+          <em>Groceries</em>
+          <span>20</span>
+        </li>
+        <li>
+          <em>Restaurants</em>
+          <span>30</span>
+        </li>
+        <li>
+          <em>Clothing</em>
+          <span>5</span>
+        </li>
+        <li>
+          <em>Automotive</em>
+          <span>10</span>
+        </li>
+        <li>
+          <em>Housing</em>
+          <span>45</span>
+        </li>
+      </ul>
+
+      <!--<div id="bullets"></div>-->
+      <div id="chart"></div>
+    </div>
+    <div ng-show="summary">
+      <div class="card">
+        <div class="item item-text-wrap">
+          <p>
+            60% of your friends are spending less than you on shopping. If you spend 10% less you could reach your goal of Buying a Rolex
+            <strong>4 months earlier</strong>.
+          </p>
+          <p>
+            <a>Click here to increase your monthly contribution by {{20 | currency : '£'}}</a>
+          </p>
+        </div>
+
+
+      </div>
+      <div class="card">
+
+        <div class="item item-text-wrap">
+          <p>
+            You spend {{300 | currency :'£'}} a week on bars and restaurants. If you reduce your nights out from 5 to 2 times a week
+            you could reach your goal of Croatia Summer 2017 <strong>7 months earlier</strong>.
+          </p>
+          <p>
+            <a>Click here to increase your monthly contribution by {{180 | currency : '£'}}</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="item item-text-wrap">
+        </div>
+      </div>
+    </div>
     <!--<ion-list>
       <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
         {{playlist.title}}
@@ -7,35 +87,7 @@
     </ion-list>-->
 
 
-    <div id = "pie-chart" class="pieID pie">
-      
-    </div>
 
-    <ul class="pieID legend">
-      <li>
-        <em>Groceries</em>
-        <span>718</span>
-      </li>
-      <li>
-        <em>Restaurants</em>
-        <span>531</span>
-      </li>
-      <li>
-        <em>Clothing</em>
-        <span>868</span>
-      </li>
-      <li>
-        <em>Automotive</em>
-        <span>344</span>
-      </li>
-      <li>
-        <em>Housing</em>
-        <span>1145</span>
-      </li>
-    </ul>
-
-    <div id = "bullets"></div>
-    <div id = "chart"></div>
 
 
 
@@ -63,6 +115,5 @@
 		</figure>-->
 
   </ion-content>
-
 
 </ion-view>

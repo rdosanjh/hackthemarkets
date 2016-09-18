@@ -1,5 +1,6 @@
 angular.module('starter.Summary', ['starter.services'])
     .controller('SummaryCtrl', function ($scope, $stateParams, detailsService, $timeout) {
+        $scope.summary = true;
         createPie(".pieID.legend", ".pieID.pie");
 
         var details = detailsService.getUserDetails();

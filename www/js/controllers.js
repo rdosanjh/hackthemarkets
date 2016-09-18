@@ -53,9 +53,9 @@ angular.module('starter.controllers', ['starter.services', 'starter.Summary'])
 
     if (!hasSamples) {
       $scope.details.goals.push({
-        name: "Funding our startup",
+        name: "Croatia Summer 2017",
         amount: 7432.73,
-        percentage : 155,
+        percentage: 155,
         members: [
           {
             name: 'Angela Dunkleman',
@@ -75,13 +75,14 @@ angular.module('starter.controllers', ['starter.services', 'starter.Summary'])
       $scope.details.goals.push({
         name: "Buying a Rolex",
         amount: 1300,
-        percentage : 234
+        percentage: 234
       });
       detailsService.setUserDetails($scope.details);
     }
 
   })
   .controller('SignupCtrl', function ($scope, detailsService, $state, $ionicModal, $timeout) {
+
 
     $scope.loginData = {};
 
@@ -270,10 +271,15 @@ angular.module('starter.controllers', ['starter.services', 'starter.Summary'])
 
 
   .controller('GoalCtrl', function ($scope, detailsService, $state) {
+
+    $scope.setSecondPhase = function () {
+      $scope.nextPhase = true;
+    }
     var details = detailsService.getUserDetails();
     console.log("details", details);
     if (details && details.goals) {
       $scope.goal = details.goals[0];
+      $scope.goal.risk = 'moderate';
       if ($scope.goal.type === "Car") {
         $scope.goal.timeframe = 3;
       }

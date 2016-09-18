@@ -15,25 +15,62 @@
     }
     
     ​.green {
-        color: green;
+        color: green !important;
     }
-    .white{
-        color:#fff;
+    
+    .white {
+        color: #fff;
+    }
+    
+    .fl {
+        float: left
+    }
+    
+    .fr {
+        float: right
+    }
+
+    .pie::after{
+        margin:10px auto;
+    }
+
+    .legend li{
+        width:100%;
+    }
+
+    .legend span::after{
+        content: ' %'
     }
 </style>
 <ion-view view-title="{{goal.name}}">
     <ion-content>
-        <div class="card">
+        <div class="list card">
+            <div class="item ">
+                <h2>Overview</h2>
+            </div>
             <div class="item item-text-wrap">
-                <h1 class=" ">{{goal.amount | currency : '£'}} </h1>
-                <i class="ion-arrow-up-b green" data-pack="default" data-tags=""></i> 7%
+                <h1 class="fl">{{goal.amount | currency : '£'}} </h1>
+                <span class="fr" style="color:green;padding-top:10px;">
+                <i class="ion-arrow-up-b"  data-pack="default" data-tags=""></i> 7%
+                </span>
+                <div class="clearfix"></div>
+            </div>
+            <div class="item item-text-wrap">
+                <div>
+                    <span>What you invested</span>
+                    <span class="fr">{{(goal.amount / 1.2) + 50| currency : '£'}}</span>
+                </div>
+                <div>
+                    <span>What you earned</span>
+                    <span class="fr" style="color:green">{{goal.amount - ((goal.amount / 1.2) + 50)| currency : '£'}}</span>
+                </div>
             </div>
         </div>
-        <div class="card" >
+        <div class="card">
             <div class="item item-text-wrap" style="background-color:#02A5C4;">
                 <h2 class="white">You are on Robeco one neutral</h2>
             </div>
-            
+
         </div>
         <div class="list card">
             <div class="item ">
@@ -46,28 +83,28 @@
 
         <div class="list card">
             <div class="item ">
-                <h2>Performance</h2>
+                <h2>Portfolio</h2>
             </div>
-            <div id="pie-chart" style="display:inline-block" class="pieID2 pie">
+            <div id="pie-chart" style="margin:0 auto" class="pieID2 pie">
 
             </div>
 
             <ul class="pieID2 legend">
                 <li>
                     <em>ETFs</em>
-                    <span>718</span>
+                    <span>30</span> 
                 </li>
                 <li>
                     <em>Bonds</em>
-                    <span>531</span>
+                    <span>10</span> 
                 </li>
                 <li>
                     <em>FX</em>
-                    <span>868</span>
+                    <span>20</span> 
                 </li>
                 <li>
                     <em>Securites</em>
-                    <span>344</span>
+                    <span>40</span> 
                 </li>
             </ul>
         </div>
